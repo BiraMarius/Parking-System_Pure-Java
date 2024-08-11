@@ -19,6 +19,8 @@ abstract class ParkingLot {
     private ArrayList<Vehicle> vehicle = new ArrayList<>();
     private LinkedList<Report> reports = new LinkedList<>();
 
+    //Constructors
+
     public ParkingLot(String name, Integer parkingSpaces, Integer availableParkingSpaces, String adress, String contactPhone, BigDecimal costPerHour, Integer freeHours, Integer exitTime) {
         this.name = name;
         this.parkingSpaces = parkingSpaces;
@@ -112,7 +114,7 @@ abstract class ParkingLot {
         this.exitTime = exitTime;
     }
 
-    //ParkingLot methods.
+    //Class methods
 
     public abstract String park(Vehicle vehicle);
     public abstract Long availableParkingPlaces();
