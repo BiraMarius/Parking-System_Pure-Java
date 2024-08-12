@@ -43,9 +43,13 @@ public class Main {
         //car.showVehicle(car2);
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-        ParkingLotActions promenadaParking = new ParkingLotActions("Promenada parking", 80,"Promenada mall", "0773737", BigDecimal.valueOf(10), 1, 5);
+        ParkingLotActions promenadaParking = new ParkingLotActions("Promenada parking", 1,"Promenada mall", "0773737", BigDecimal.valueOf(10), 1, 5);
         RegistrationPlate registrationPlate = new RegistrationPlate("B800YAM");
         Car car = new Car(registrationPlate);
         promenadaParking.park(car);
+
+        RegistrationPlate registrationPlate2 = new RegistrationPlate("B802YAM");
+        Car car2 = new Car(registrationPlate2);
+        promenadaParking.park(car2);
     }
 }

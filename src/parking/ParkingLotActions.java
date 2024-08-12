@@ -1,5 +1,6 @@
 package parking;
 
+import parking.exceptions.ParkingException;
 import parking.vehicle.Vehicle;
 
 import java.math.BigDecimal;
@@ -13,11 +14,19 @@ public class ParkingLotActions extends ParkingLot{
     }
 
     @Override
-    public ParkingTicket park(Vehicle vehicle) {
-        List<Vehicle> vehicleList = getVehicles();
-        vehicleList.add(vehicle);
-        ParkingTicket parkingTicket = new ParkingTicket(vehicle.getPlate());
-        return parkingTicket;
+    public ParkingTicket park(Vehicle vehicle) throws RuntimeException{
+        int availableParkingSpaces = getAvailableParkingSpaces();
+        if(availableParkingSpaces <= 0){
+            throw new ParkingException("Out of parking spaces.");
+        } else {
+            List<Vehicle> vehicleList = getVehicles();
+            vehicleList.add(vehicle);
+            ParkingTicket parkingTicket = new ParkingTicket(vehicle.getPlate());
+            setAvailableParkingSpaces(--availableParkingSpaces);
+            System.out.println("Parking spaces= "+availableParkingSpaces);
+            return parkingTicket;
+        }
+
     }
 
     @Override
