@@ -17,9 +17,8 @@ public class Vehicle {
 
     //Constructors
 
-    public Vehicle(RegistrationPlate plate, LocalDateTime entryTime) {
+    public Vehicle(RegistrationPlate plate) {
         this.plate = plate;
-        this.entryTime = entryTime;
         this.setId(lastId);
         vehicleCounter++;
         lastId++;
@@ -100,7 +99,12 @@ public class Vehicle {
         System.out.println("# Last ID: "+String.valueOf(getLastId()));
         System.out.println("# Counter: "+ String.valueOf(getVehicleCounter()));
         System.out.println("# PLATE: "+vehicle.getPlate().getRegistrationNumber());
-        System.out.println("# Entry Time: "+formatTime(vehicle.getEntryTime()));
+        System.out.print("# Entry Time: ");
+        if(entryTime==null){
+            System.out.println("null");
+        } else {
+            System.out.println(formatTime(vehicle.getEntryTime()));
+        }
         System.out.print("# Exit Time: ");
                 if(vehicle.getExitTime()==null){
                     System.out.println("null");
@@ -118,7 +122,12 @@ public class Vehicle {
         System.out.println("# Last ID: "+String.valueOf(getLastId()));
         System.out.println("# Counter: "+ String.valueOf(vehicleCounter));
         System.out.println("# PLATE: "+plate.getRegistrationNumber());
-        System.out.println("# Entry Time: "+formatTime(entryTime));
+        System.out.print("# Entry Time: ");
+        if(entryTime==null){
+            System.out.println("null");
+        } else {
+            System.out.println(formatTime(entryTime));
+        }
         System.out.print("# Exit Time: ");
         if(exitTime==null){
             System.out.println("null");

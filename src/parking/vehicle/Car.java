@@ -10,7 +10,7 @@ public class Car extends Vehicle{
     //Constructors
 
     public Car(RegistrationPlate plate) {
-        super(plate, LocalDateTime.now());
+        super(plate);
         carCounter++;
     }
 

@@ -10,7 +10,7 @@ public class Motorcycle extends Vehicle{
     //Constructors
 
     public Motorcycle(RegistrationPlate registrationPlate) {
-        super(registrationPlate, LocalDateTime.now());
+        super(registrationPlate);
         motorcycleCounter++;
     }
 

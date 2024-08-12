@@ -16,7 +16,7 @@ abstract class ParkingLot {
     private BigDecimal costPerHour;
     private Integer freeHours;
     private Integer exitTime;
-    private ArrayList<Vehicle> vehicle = new ArrayList<>();
+    private ArrayList<Vehicle> vehicles = new ArrayList<>();
     private LinkedList<Report> reports = new LinkedList<>();
 
     //Constructors
@@ -82,12 +82,12 @@ abstract class ParkingLot {
         this.costPerHour = costPerHour;
     }
 
-    public ArrayList<Vehicle> getVehicle() {
-        return vehicle;
+    public ArrayList<Vehicle> getVehicles() {
+        return vehicles;
     }
 
-    public void setVehicle(ArrayList<Vehicle> vehicle) {
-        this.vehicle = vehicle;
+    public void setVehicles(ArrayList<Vehicle> vehicles) {
+        this.vehicles = vehicles;
     }
 
     public LinkedList<Report> getReports() {
@@ -116,7 +116,7 @@ abstract class ParkingLot {
 
     //Class methods
 
-    public abstract String park(Vehicle vehicle);
+    public abstract ParkingTicket park(Vehicle vehicle);
     public abstract Long availableParkingPlaces();
 
 }

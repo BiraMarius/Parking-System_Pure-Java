@@ -1,7 +1,9 @@
+import parking.ParkingLotActions;
 import parking.vehicle.Car;
 import parking.vehicle.Motorcycle;
 import parking.vehicle.RegistrationPlate;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class Main {
@@ -18,27 +20,32 @@ public class Main {
 //            default:
 //                System.out.println("Not found");
 //        }
-        RegistrationPlate registrationPlate = new RegistrationPlate("B800YAM");
-        Car car = new Car(registrationPlate);
+
         //car.showVehicle(car);
         //car.showVehicle();
-        car.showVehicle();
-        registrationPlate.registrationPlateDetails();
+        //car.showVehicle();
+        //registrationPlate.registrationPlateDetails();
 
-        RegistrationPlate registrationPlate2 = new RegistrationPlate("MAIGR01");
-        Car car2 = new Car(registrationPlate2);
+//        RegistrationPlate registrationPlate2 = new RegistrationPlate("BO11YAM");
+//        Car car2 = new Car(registrationPlate2);
         //car2.showVehicle(car2);
         //car2.showVehicle();
-        car2.showVehicle();
-        registrationPlate2.registrationPlateDetails();
-
-
-
-        RegistrationPlate registrationPlate3 = new RegistrationPlate("B803MOT");
-        Motorcycle motorcycle = new Motorcycle(registrationPlate3);
+//        car2.showVehicle();
+//        registrationPlate2.registrationPlateDetails();
+//
+//
+//
+//        RegistrationPlate registrationPlate3 = new RegistrationPlate("B803MOT");
+//        Motorcycle motorcycle = new Motorcycle(registrationPlate3);
         //motorcycle.showVehicle();
 
 
         //car.showVehicle(car2);
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+        ParkingLotActions promenadaParking = new ParkingLotActions("Promenada parking", 80,"Promenada mall", "0773737", BigDecimal.valueOf(10), 1, 5);
+        RegistrationPlate registrationPlate = new RegistrationPlate("B800YAM");
+        Car car = new Car(registrationPlate);
+        promenadaParking.park(car);
     }
 }
