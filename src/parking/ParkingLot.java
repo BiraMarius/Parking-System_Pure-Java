@@ -117,6 +117,6 @@ abstract class ParkingLot {
     //Class methods
 
     public abstract ParkingTicket park(Vehicle vehicle);
-    public abstract Long availableParkingPlaces();
+    public abstract void availableParkingPlaces();
 
 }

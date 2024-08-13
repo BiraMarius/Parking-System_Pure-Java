@@ -1,11 +1,17 @@
 package parking;
 
+import parking.exceptions.ParkingTicketException;
 import parking.vehicle.RegistrationPlate;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
-import static parking.util.TimeUtil.formatTime;
+import static parking.util.PaymentUtil.calculatePrice;
+import static parking.util.TimeUtil.*;
 
 public class ParkingTicket {
     private Long id;
@@ -17,11 +23,14 @@ public class ParkingTicket {
     private LocalDateTime validatedExitTime;
     private Long duration;
     private BigDecimal cost;
+    private ParkingLotActions parkingLot;
+    private static List<ParkingTicket> tickets=new ArrayList<>();
 
     //Constructors
 
-    public ParkingTicket(RegistrationPlate plate) {
+    public ParkingTicket(RegistrationPlate plate, ParkingLotActions parkingLotActions) {
         this.plate = plate;
+        this.parkingLot= parkingLotActions;
         entryTime=LocalDateTime.now();
         id=lastId;
         lastId++;
@@ -103,6 +112,21 @@ public class ParkingTicket {
         this.cost = cost;
     }
 
+    public ParkingLotActions getParkingLot() {
+        return parkingLot;
+    }
+
+    public void setParkingLot(ParkingLotActions parkingLot) {
+        this.parkingLot = parkingLot;
+    }
+
+    public static List<ParkingTicket> getTickets() {
+        return tickets;
+    }
+
+    public static void setTickets(List<ParkingTicket> tickets) {
+        ParkingTicket.tickets = tickets;
+    }
 
     //Class methods
 
@@ -115,5 +139,35 @@ public class ParkingTicket {
         System.out.println("# ");
         System.out.println("#  YOUR TICKET ID IS: "+String.valueOf(id));
         System.out.println("#######################################");
+    }
+
+    public void validateParkingTicket(){
+        calculatePrice(this);
+    }
+
+    public void payParkingTicket(BigDecimal payment){
+        if(payment.compareTo(cost) < 0){
+            System.out.println("Insufficient funds!");
+        } else if (payment.compareTo(cost) > 0){
+            System.out.println("Payment accepted!");
+            System.out.println("Your payment is higher, there is your change: "+String.valueOf(payment.subtract(cost)));
+            System.out.println("Have a nice day! Drive safe!");
+            this.setDuration(calculateDuration(this));
+        } else if(payment.compareTo(cost)==0){
+            System.out.println("Payment accepted!");
+            System.out.println("Have a nice day! Drive safe!");
+            this.setDuration(calculateDuration(this));
+        }
+    }
+
+    public static ParkingTicket findTicket(String registrationPlate){
+        Optional<ParkingTicket> parkingTicket = tickets.stream()
+                .filter(ticket -> ticket.plate.getRegistrationNumber().equals(registrationPlate))
+                .findFirst();
+        if(parkingTicket.isPresent()){
+            return parkingTicket.get();
+        } else {
+            throw new ParkingTicketException("Ticket not found.");
+        }
     }
 }

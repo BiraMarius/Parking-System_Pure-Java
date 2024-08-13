@@ -6,6 +6,10 @@ import parking.vehicle.Vehicle;
 import java.math.BigDecimal;
 import java.util.List;
 
+import static parking.ParkingTicket.getTickets;
+import static parking.ParkingTicket.setTickets;
+
+
 public class ParkingLotActions extends ParkingLot{
 
 
@@ -21,17 +25,19 @@ public class ParkingLotActions extends ParkingLot{
         } else {
             List<Vehicle> vehicleList = getVehicles();
             vehicleList.add(vehicle);
-            ParkingTicket parkingTicket = new ParkingTicket(vehicle.getPlate());
+            ParkingTicket parkingTicket = new ParkingTicket(vehicle.getPlate(), this);
             setAvailableParkingSpaces(--availableParkingSpaces);
-            System.out.println("Parking spaces= "+availableParkingSpaces);
+            List<ParkingTicket> tickets = getTickets();
+            tickets.add(parkingTicket);
+            setTickets(tickets);
             return parkingTicket;
         }
 
     }
 
     @Override
-    public Long availableParkingPlaces() {
-        return null;
+    public void availableParkingPlaces() {
+        System.out.println("There are "+String.valueOf(getAvailableParkingSpaces()) + " parking spaces left.");
     }
 
 
